@@ -249,25 +249,23 @@ public class Player {
 
     /**
      * Kills the player <br>
-     * <br>
-     * I don't know how to register GameOverState as a state.
-     * 
-     *
      */
     public void kill(){
     	
-    	handler.getMouseManager().setUimanager(null);
+    	
+    	lenght = 0;
+        for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
+            for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+
+                handler.getWorld().playerLocation[i][j]=false;
+
+            }
+        }
+        
+        handler.getMouseManager().setUimanager(null);
         handler.getGame().reStart();
         State.setState(handler.getGame().GameOverState);
     	
-    	//lenght = 0;
-        //for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
-          //  for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-
-            //    handler.getWorld().playerLocation[i][j]=false;
-
-            //}
-        //}
     }
 
     public boolean isJustAte() {
