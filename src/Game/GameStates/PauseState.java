@@ -19,22 +19,22 @@ public class PauseState extends State {
         super(handler);
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
-
+        
+        //This is a resume button which does work
         uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Resume, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().gameState);
         }));
-
-        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.Options, () -> {
+        
+        //This is the back to title button which we repurposed from the Options button coso.
+        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.BTitle, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
-
-        uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
-        }));
-
+        
+        //as you can see the options button is missing because we have no options to set.
+        //I mean this is snake game what options can you even set?
+        
 
 
 

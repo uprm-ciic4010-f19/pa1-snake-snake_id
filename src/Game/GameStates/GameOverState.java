@@ -20,21 +20,20 @@ public class GameOverState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Resume, () -> {
+        //ok we need to redo esta cosa to have a *game over* background and a *restart* option
+        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Restart, () -> {
+        	//ok done! yay we now have a game over screen.
             handler.getMouseManager().setUimanager(null);
+            handler.getGame().reStart();
             State.setState(handler.getGame().gameState);
         }));
 
-        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.Options, () -> {
+        //Bye bye options
+        
+        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.BTitle, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
-
-        uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
-        }));
-
 
 
 
@@ -60,7 +59,8 @@ public class GameOverState extends State {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Images.Pause,0,0,800,600,null);
+    	//we need a new image aca
+        g.drawImage(Images.GameOver,0,0,800,600,null);
         uiManager.Render(g);
 
     }
