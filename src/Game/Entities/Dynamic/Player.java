@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.State;
+
 /**
  * Created by AlexVR on 7/2/2018.
  */
@@ -39,19 +41,36 @@ public class Player {
             checkCollisionAndMove();
             moveCounter=0;
         }
+        
+        //On escape, go to the pause menu.
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+        	State.setState(handler.getGame().pauseState);
+            }
+        
+        
+        
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
-            direction="Up";
+        	if (direction=="Down") {
+        		//Do nothing.
+        		//We can't allow the user to essentially suicide
+        	}
+        	else {
+        		//Actually do the thing
+                direction="Up";
+        	}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
-            direction="Down";
+            if(direction=="Up") {} else {direction="Down";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
-            direction="Left";
+        	if(direction=="Right") {} else {direction="Left";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
-            direction="Right";
+        	if(direction=="Left") {} else {direction="Right";}
         }
 
     }
 
     public void checkCollisionAndMove(){
+    	
+    	  	
         handler.getWorld().playerLocation[xCoord][yCoord]=false;
         int x = xCoord;
         int y = yCoord;
@@ -86,8 +105,9 @@ public class Player {
                 break;
         }
         handler.getWorld().playerLocation[xCoord][yCoord]=true;
-
-
+        
+        //How can we check if there is a tail infront of the player?
+        
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
         }
@@ -227,15 +247,27 @@ public class Player {
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
     }
 
+    /**
+     * Kills the player <br>
+     * <br>
+     * I don't know how to register GameOverState as a state.
+     * 
+     *
+     */
     public void kill(){
-        lenght = 0;
-        for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
-            for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+    	
+    	handler.getMouseManager().setUimanager(null);
+        handler.getGame().reStart();
+        State.setState(handler.getGame().GameOverState);
+    	
+    	//lenght = 0;
+        //for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
+          //  for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 
-                handler.getWorld().playerLocation[i][j]=false;
+            //    handler.getWorld().playerLocation[i][j]=false;
 
-            }
-        }
+            //}
+        //}
     }
 
     public boolean isJustAte() {
