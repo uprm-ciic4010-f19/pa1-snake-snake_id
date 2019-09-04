@@ -7,7 +7,9 @@ import Main.Handler;
  */
 public class Apple {
 
-    private Handler handler;
+    @SuppressWarnings("unused")
+	private Handler handler;
+    //unsure as to why handler is here and is unused.
 
     public int xCoord;
     public int yCoord;

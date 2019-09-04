@@ -74,7 +74,9 @@ public class GameSetUp implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
 
-        Images img = new Images();
+        @SuppressWarnings("unused")
+        //I don't know why this variable is here if its unused
+		Images img = new Images();
 
 
         handler = new Handler(this);
@@ -134,7 +136,11 @@ public class GameSetUp implements Runnable {
         long now;
         long lastTime = System.nanoTime();
         long timer = 0;
-        int ticks = 0;
+        
+        
+        @SuppressWarnings("unused")
+        //This is a counter for the number of ticks. This could be used to make an apple go bad.
+		int ticks = 0;
 
         while(running){
             //makes sure the games runs smoothly at 60 FPS

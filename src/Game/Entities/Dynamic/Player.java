@@ -121,7 +121,11 @@ public class Player {
     }
 
     public void render(Graphics g,Boolean[][] playeLocation){
-        Random r = new Random();
+        
+    	@SuppressWarnings("unused")
+    	//this random variable may be declared to make a random color snake. 
+		Random r = new Random();
+    	
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
                 
