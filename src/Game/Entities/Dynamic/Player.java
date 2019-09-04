@@ -124,9 +124,17 @@ public class Player {
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.WHITE);
-
-                if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
+                
+                if(playeLocation[i][j]){
+                	g.setColor(new Color(0, 167, 0));
+                    g.fillRect((i*handler.getWorld().GridPixelsize),
+                            (j*handler.getWorld().GridPixelsize),
+                            handler.getWorld().GridPixelsize,
+                            handler.getWorld().GridPixelsize);
+                }
+                
+                if(handler.getWorld().appleLocation[i][j]){
+                	g.setColor(new Color(127, 0, 0));
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
