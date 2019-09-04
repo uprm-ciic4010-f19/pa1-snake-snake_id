@@ -125,7 +125,14 @@ public class Player {
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
                 
+            	//This renders all the entities on screen (Player, Apple, and Tail)
+            	
+            	//If its a player (or tail) that's located in I,J do esto:
                 if(playeLocation[i][j]){
+                	//BTW looks like that two dimensional array represents if the player or tail is there
+                	//I think you can use it to program the collission detection of the snake on itself.
+                	
+                	//This sets the color to the shade of green we need
                 	g.setColor(new Color(0, 167, 0));
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
@@ -133,7 +140,12 @@ public class Player {
                             handler.getWorld().GridPixelsize);
                 }
                 
+                //If its an apple do esto:
                 if(handler.getWorld().appleLocation[i][j]){
+                	
+                	//Consider writing a test to see if the apple is bad, and if it is, use a darker shade of red.
+                	//You can specify that by decreasing the red value (The integers below on new Color() represent
+                	//Red, green, and blue respectively)
                 	g.setColor(new Color(127, 0, 0));
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
