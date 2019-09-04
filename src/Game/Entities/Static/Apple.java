@@ -16,6 +16,8 @@ public class Apple {
         this.handler=handler;
         this.xCoord=x;
         this.yCoord=y;
+        
+        //I'm assuming that here is where the isGood() property goes.
     }
 
 

@@ -59,7 +59,7 @@ public class GameOverState extends State {
 
     @Override
     public void render(Graphics g) {
-    	//we need a new image aca
+    	//Had to change the size of the image to 600x600 as it was originally 800x600
         g.drawImage(Images.GameOver,0,0,600,600,null);
         uiManager.Render(g);
 

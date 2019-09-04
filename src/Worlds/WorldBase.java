@@ -52,7 +52,10 @@ public abstract class WorldBase {
     }
 
     public void render(Graphics g){
+    	//This sets the background color
     	g.setColor(Color.darkGray);
+    	
+    	//This actually fills the background
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
 
         //rendergrid(g);

@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
  */
 public class SpriteSheet {
 
+	
+	//Honestly I have no idea why this is here.
 
     private BufferedImage sheet;
 

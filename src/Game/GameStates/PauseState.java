@@ -60,6 +60,7 @@ public class PauseState extends State {
 
     @Override
     public void render(Graphics g) {
+    	//Had to change the size of the image to 600x600 as it was originally 800x600
         g.drawImage(Images.Pause,0,0,600,600,null);
         uiManager.Render(g);
 

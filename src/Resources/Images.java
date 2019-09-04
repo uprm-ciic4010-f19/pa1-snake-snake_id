@@ -33,10 +33,14 @@ public class Images {
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/Title.png"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Buttons/Pause.png"));
+            
+            //Adds the GameOver background to the images
             GameOver = ImageIO.read(getClass().getResourceAsStream("/Buttons/GameOver.png"));
+            
             Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/Resume.png"));
             Resume[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeP.png"));
             
+            //Adds the restart button to the images            
             Restart[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/Restart.png"));
             Restart[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/RestartP.png"));
             

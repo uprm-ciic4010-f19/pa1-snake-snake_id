@@ -87,6 +87,11 @@ public class GameSetUp implements Runnable {
         State.setState(menuState);
 
         try {
+        	
+        	//If you want to change the music, ever, here you can change the file name.
+        	
+        	//We should probably delete Nature.wav anyways. Its 20MB. That's too large
+        	//for a 2 minute track for a silly little game.
 
             audioFile = getClass().getResourceAsStream("/music/nature.wav");
             audioStream = AudioSystem.getAudioInputStream(audioFile);
