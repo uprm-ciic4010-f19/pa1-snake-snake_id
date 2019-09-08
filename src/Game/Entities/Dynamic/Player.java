@@ -47,7 +47,7 @@ public class Player {
             direction="Left";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
             direction="Right";
-        }
+        } //if for example you press up, and the previous direction was down, do not go in that direction so you dont go into yourself and so forth 
 
     }
 
@@ -64,7 +64,7 @@ public class Player {
                 }
                 break;
             case "Right":
-                if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){
+                if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){ //around here checks if youre beyond the border 
                     kill();
                 }else{
                     xCoord++;
@@ -104,7 +104,7 @@ public class Player {
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.WHITE);
+                g.setColor(Color.GREEN);  /// separate these two if statements to separate player and apple colors 
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
