@@ -10,31 +10,30 @@ import java.awt.*;
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class PauseState extends State {
+public class GameOverState extends State {
 
     private int count = 0;
     private UIManager uiManager;
 
-    public PauseState(Handler handler) {
+    public GameOverState(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
-        
-        //This is a resume button which does work
-        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Resume, () -> {
+
+        //ok we need to redo esta cosa to have a *game over* background and a *restart* option
+        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Restart, () -> {
+        	//ok done! yay we now have a game over screen.
             handler.getMouseManager().setUimanager(null);
+            handler.getGame().reStart();
             State.setState(handler.getGame().gameState);
         }));
+
+        //Bye bye options
         
-        //This is the back to title button which we repurposed from the Options button coso.
         uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.BTitle, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
-        
-        //as you can see the options button is missing because we have no options to set.
-        //I mean this is snake game what options can you even set?
-        
 
 
 
@@ -61,7 +60,7 @@ public class PauseState extends State {
     @Override
     public void render(Graphics g) {
     	//Had to change the size of the image to 600x600 as it was originally 800x600
-        g.drawImage(Images.Pause,0,0,600,600,null);
+        g.drawImage(Images.GameOver,0,0,600,600,null);
         uiManager.Render(g);
 
     }

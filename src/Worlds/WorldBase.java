@@ -52,16 +52,27 @@ public abstract class WorldBase {
     }
 
     public void render(Graphics g){
+    	//This sets the background color
+    	g.setColor(Color.darkGray);
+    	
+    	//This actually fills the background
+        g.fillRect(0,0,handler.getWidth(),handler.getHeight());
 
-        for (int i = 0; i <= 800; i = i + GridPixelsize) {
+        //rendergrid(g);
+    }
+    
+    /**
+     * Render the grid, comment me out if you don't need me
+     * @param g
+     */
+    public void rendergrid(Graphics g) {
+    	for (int i = 0; i <= 800; i = i + GridPixelsize) {
 
-            g.setColor(Color.white);
+            g.setColor(Color.black);
             g.drawLine(0, i, handler.getWidth() , i);
             g.drawLine(i,0,i,handler.getHeight());
 
         }
-
-
 
     }
 

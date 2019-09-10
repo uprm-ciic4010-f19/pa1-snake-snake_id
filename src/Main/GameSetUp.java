@@ -45,6 +45,7 @@ public class GameSetUp implements Runnable {
     public State gameState;
     public State menuState;
     public State pauseState;
+    public State GameOverState;
 
     //Res.music
     private InputStream audioFile;
@@ -73,7 +74,9 @@ public class GameSetUp implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
 
-        Images img = new Images();
+        @SuppressWarnings("unused")
+        //I don't know why this variable is here if its unused
+		Images img = new Images();
 
 
         handler = new Handler(this);
@@ -81,10 +84,16 @@ public class GameSetUp implements Runnable {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
+        GameOverState = new Game.GameStates.GameOverState(handler);
 
         State.setState(menuState);
 
         try {
+        	
+        	//If you want to change the music, ever, here you can change the file name.
+        	
+        	//We should probably delete Nature.wav anyways. Its 20MB. That's too large
+        	//for a 2 minute track for a silly little game.
 
             audioFile = getClass().getResourceAsStream("/music/nature.wav");
             audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -127,7 +136,11 @@ public class GameSetUp implements Runnable {
         long now;
         long lastTime = System.nanoTime();
         long timer = 0;
-        int ticks = 0;
+        
+        
+        @SuppressWarnings("unused")
+        //This is a counter for the number of ticks. This could be used to make an apple go bad.
+		int ticks = 0;
 
         while(running){
             //makes sure the games runs smoothly at 60 FPS

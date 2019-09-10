@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.State;
+
 /**
  * Created by AlexVR on 7/2/2018.
  */
@@ -19,7 +21,7 @@ public class Player {
     public int yCoord;
 
     public int moveCounter;
-
+    //para el score, se creo aqui dos variables dobles, current score y score ///////////////////////////////////////////////////
     public String direction;//is your first name one?
 
     public Player(Handler handler){
@@ -30,6 +32,8 @@ public class Player {
         direction= "Right";
         justAte = false;
         lenght= 1;
+       //Aqui se escribio que current score era igual a 1 (valor inicial) 
+        
 
     }
 
@@ -39,19 +43,33 @@ public class Player {
             checkCollisionAndMove();
             moveCounter=0;
         }
+        
+        //On escape, go to the pause menu.
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+        	State.setState(handler.getGame().pauseState);
+            
+        
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
-            direction="Up";
+        	if (direction=="Down") {}else {direction="Up";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
-            direction="Down";
+            if(direction=="Up") {} else {direction="Down";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
-            direction="Left";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
-            direction="Right";
-        } //if for example you press up, and the previous direction was down, do not go in that direction so you dont go into yourself and so forth 
+        	if(direction=="Right") {} else {direction="Left";}
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)) {
+          if(direction=="Left") {} else {direction="Right";{}
+        	
+        }
+       }
+        }
+        
+        	//if for example you press up, and the previous direction was down, do not go in that direction so you dont go into yourself and so forth
+
 
     }
 
     public void checkCollisionAndMove(){
+    	
+    	  	
         handler.getWorld().playerLocation[xCoord][yCoord]=false;
         int x = xCoord;
         int y = yCoord;
@@ -86,8 +104,9 @@ public class Player {
                 break;
         }
         handler.getWorld().playerLocation[xCoord][yCoord]=true;
-
-
+        
+        //How can we check if there is a tail in front of the player?
+        
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
         }
@@ -97,31 +116,65 @@ public class Player {
             handler.getWorld().body.removeLast();
             handler.getWorld().body.addFirst(new Tail(x, y,handler));
         }
-
     }
 
     public void render(Graphics g,Boolean[][] playeLocation){
-        Random r = new Random();
+        
+    	@SuppressWarnings("unused")
+    	//this random variable may be declared to make a random color snake. 
+		Random r = new Random();
+    	
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+//<<<<<<< HEAD
                 g.setColor(Color.GREEN);  /// separate these two if statements to separate player and apple colors 
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
+//=======
+                
+            	//This renders all the entities on screen (Player, Apple, and Tail)
+            	
+            	//If its a player (or tail) that's located in I,J do esto:
+                if(playeLocation[i][j]){
+                	//BTW looks like that two dimensional array represents if the player or tail is there
+                	//I think you can use it to program the collission detection of the snake on itself.
+                	
+                	//This sets the color to the shade of green we need
+                	g.setColor(new Color(0, 167, 0));
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
                 }
+                
+                //If its an apple do esto:
+                if(handler.getWorld().appleLocation[i][j]){
+                	
+                	//Consider writing a test to see if the apple is bad, and if it is, use a darker shade of red.
+                	//You can specify that by decreasing the red value (The integers below on new Color() represent
+                	//Red, green, and blue respectively)
+                	g.setColor(new Color(127, 0, 0));
+//>>>>>>> branch 'master' of https://github.com/uprm-ciic4010-f19/pa1-snake-snake_id.git
+                    g.fillRect((i*handler.getWorld().GridPixelsize),
+                            (j*handler.getWorld().GridPixelsize),
+                            handler.getWorld().GridPixelsize,
+                            handler.getWorld().GridPixelsize);
+                }
+                    
+                
+                
 
+                }
             }
         }
-
-
     }
+                
 
     public void Eat(){
-        lenght++;
-        Tail tail= null;
+        
+    	lenght++;
+        // Aqui score += Math.sqrt((2*currentscore) + 1) 
+    	Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false;
         handler.getWorld().appleOnBoard=false;
         switch (direction){
@@ -227,8 +280,13 @@ public class Player {
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
     }
 
+    /**
+     * Kills the player <br>
+     */
     public void kill(){
-        lenght = 0;
+    	
+    	
+    	lenght = 0;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 
@@ -236,6 +294,11 @@ public class Player {
 
             }
         }
+        
+        handler.getMouseManager().setUimanager(null);
+        handler.getGame().reStart();
+        State.setState(handler.getGame().GameOverState);
+    	
     }
 
     public boolean isJustAte() {

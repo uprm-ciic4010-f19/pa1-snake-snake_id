@@ -7,7 +7,9 @@ import Main.Handler;
  */
 public class Apple {
 
-    private Handler handler;
+    @SuppressWarnings("unused")
+	private Handler handler;
+    //unsure as to why handler is here and is unused.
 
     public int xCoord;
     public int yCoord;
@@ -16,6 +18,8 @@ public class Apple {
         this.handler=handler;
         this.xCoord=x;
         this.yCoord=y;
+        
+        //I'm assuming that here is where the isGood() property goes.
     }
 
 
