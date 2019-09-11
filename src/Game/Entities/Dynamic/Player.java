@@ -21,7 +21,7 @@ public class Player {
     public int yCoord;
 
     public int moveCounter;
-    //para el score, se creo aqui dos variables dobles, current score y score ///////////////////////////////////////////////////
+    //para el score, creo aqui dos variables dobles, current score y score ///////////////////////////////////////////////////
     public String direction;//is your first name one?
 
     public Player(Handler handler){
@@ -32,7 +32,7 @@ public class Player {
         direction= "Right";
         justAte = false;
         lenght= 1;
-       //Aqui se escribio que current score era igual a 1 (valor inicial) 
+       //Aqui escribe que current score era igual a 1 (valor inicial) 
         
 
     }
@@ -47,11 +47,12 @@ public class Player {
         //On escape, go to the pause menu.
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
         	State.setState(handler.getGame().pauseState);
-            
+        }
         
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
-        	if (direction=="Down") {}else {direction="Up";}
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down" ){
+        	direction="Up";
+        }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
             if(direction=="Up") {} else {direction="Down";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
         	if(direction=="Right") {} else {direction="Left";}
@@ -59,7 +60,7 @@ public class Player {
           if(direction=="Left") {} else {direction="Right";{}
         	
         }
-       }
+       
         }
         
         	//if for example you press up, and the previous direction was down, do not go in that direction so you dont go into yourself and so forth
