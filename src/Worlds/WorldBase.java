@@ -24,6 +24,7 @@ public abstract class WorldBase {
     public int GridPixelsize;
 
     public Player player;
+    public Player player2;
 
     protected Handler handler;
 
@@ -34,6 +35,7 @@ public abstract class WorldBase {
 
 
     public Boolean[][] playerLocation;
+    public Boolean[][] player2Location;
 
     public LinkedList<Tail> body = new LinkedList<>();
 
@@ -50,10 +52,29 @@ public abstract class WorldBase {
 
 
     }
+    
+   public void render1(Graphics g) {
+   	Graphics2D score = (Graphics2D) g;
+   	String scoreNumber = Double.toString(player.score);
+   	
+   	for (int i = 0 ; i <= 800; i = i + GridPixelsize) {
+   		
+   		
+    		g.setColor(new Color(128,0,128));
+    		g.drawLine(0, i, handler.getWidth(), i);
+    		g.drawLine(i, 0, i, handler.getHeight());
+    		score.setColor(Color.BLACK);
+    		score.setFont ( new Font ("Chalkboard" , Font.PLAIN, 30));
+    		score.drawString( "Score: " + scoreNumber, 600, 50);
+    		
+    		
+    	}
+    }
 
     public void render(Graphics g){
     	//This sets the background color
-    	g.setColor(Color.darkGray);
+    	Color purple = new Color(224, 191, 238);
+    	g.setColor(purple);
     	
     	//This actually fills the background
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
