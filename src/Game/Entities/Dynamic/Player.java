@@ -23,6 +23,8 @@ public class Player {
     public int yCoord;
 
     public int moveCounter;
+    public int ColorCounter;
+    public Color SnakeColor=Color.red;
     
     public double score;
     public double currentScore;
@@ -73,7 +75,12 @@ public class Player {
         	State.setState(handler.getGame().pauseState);
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
-        	this.add_Tail();
+        	try {
+        		this.add_Tail();	
+			} catch (Exception e) {
+			}
+        	
+        	
         }
         
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down" ){
@@ -175,19 +182,33 @@ public class Player {
                 	//I think you can use it to program the collission detection of the snake on itself.
                 	
                 	//This sets the color to the shade of green we need
-                	Random r = new Random();
-                	int color = r.nextInt(5);	
-                	if(color == 0) {
-                	g.setColor(Color.GREEN);}
-                	if(color == 1) {
-                    	g.setColor(Color.CYAN);}
-                	if(color == 2) {
-                    	g.setColor(Color.RED);}
-                	if(color == 3) {
-                    	g.setColor(Color.PINK);}
-                	if(color == 4) {
-                    	g.setColor(Color.YELLOW);}
+//                	ColorCounter++;
+//                	if (ColorCounter==100) {
+                    	Random r = new Random();
+                    	switch (r.nextInt(5)) {
+    					case 0:
+    						SnakeColor=Color.GREEN;
+    						break;
+    					case 1:
+    						SnakeColor=Color.CYAN;
+    						break;
+    					case 2:
+    						SnakeColor=Color.RED;
+    						break;
+    					case 3:
+    						SnakeColor=Color.PINK;
+    						break;
+    					case 4:
+    						SnakeColor=Color.YELLOW;
+    						break;
+
+    					default:
+    						SnakeColor=Color.ORANGE;
+    						break;}
+//                    	ColorCounter=0;
+//                	}                	
                 	
+                g.setColor(SnakeColor);
                 	
                 g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
