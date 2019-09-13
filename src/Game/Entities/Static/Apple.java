@@ -9,6 +9,7 @@ public class Apple {
 
     @SuppressWarnings("unused")
 	private Handler handler;
+    private boolean Good=true;
     //unsure as to why handler is here and is unused.
 
     
@@ -29,6 +30,8 @@ public class Apple {
         
         //I'm assuming that here is where the isGood() property goes.
     }
-
-
+    
+    public boolean isGood() {return Good;}
+    public void SetGood(boolean Goodness) {Good=Goodness;}
+    
 }

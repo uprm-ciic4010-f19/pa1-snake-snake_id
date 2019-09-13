@@ -23,7 +23,7 @@ public class Player {
     public int yCoord;
 
     public int moveCounter;
-    public int ColorCounter;
+    public int AppleHealth=1800;
     public Color SnakeColor=Color.red;
     
     public double score;
@@ -51,6 +51,25 @@ public class Player {
 
     public void tick(){
         moveCounter++;
+        
+        
+        switch (AppleHealth) {
+		case 0:
+			//Set the apple to bad
+			handler.getWorld().getApple().SetGood(false);
+			System.out.println("THE APPLE HAS GONE BAD O HNO");
+
+			//subtract
+			AppleHealth--;
+			break;
+		case -1:
+			//do nothing
+			break;
+		default:
+			AppleHealth--;
+			System.out.println("APPLE HEALTH: " + AppleHealth);
+			break;
+		}
         
         if(moveCounter>=speed) {
             checkCollisionAndMove();
@@ -166,6 +185,14 @@ public class Player {
     	//this random variable may be declared to make a random color snake. 
 		
     	
+    	Graphics2D scoreDisplay = (Graphics2D) g;
+       	String scoreNumber = Double.toString(score);
+       	
+       	scoreDisplay.setFont ( new Font ("Chalkboard" , Font.PLAIN, 15));
+       	scoreDisplay.setColor(Color.BLACK);
+       	scoreDisplay.drawString( "Score: " + scoreNumber, 0, 15);		
+       	
+    	
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 //<<<<<<< HEAD  
@@ -219,10 +246,16 @@ public class Player {
                 //If its an apple do esto:
                 if(handler.getWorld().appleLocation[i][j]){
                 	
-                	//Consider writing a test to see if the apple is bad, and if it is, use a darker shade of red.
-                	//You can specify that by decreasing the red value (The integers below on new Color() represent
-                	//Red, green, and blue respectively)
-                	g.setColor(new Color(127, 0, 0));
+                	if (handler.getWorld().getApple().isGood()){
+                		//The color if its good
+                		g.setColor(new Color(127, 0, 0));
+                	}
+                	else
+                	{
+//                		the color if its bad
+                		g.setColor(new Color(0, 0, 0));
+                	}
+                	
 //>>>>>>> branch 'master' of https://github.com/uprm-ciic4010-f19/pa1-snake-snake_id.git
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
@@ -351,11 +384,19 @@ public class Player {
     	
     	speed += -0.6;
     	
-       score += Math.sqrt((2*currentScore) + 1);
+    	if (handler.getWorld().getApple().isGood()) {
+    		score += Math.sqrt((2*currentScore) + 1);
+    	}
+    	else {
+    		score -= Math.sqrt((2*currentScore) + 1);
+    	}
+    	AppleHealth=1800;
+       
        System.out.println(score);
     	Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false;
         handler.getWorld().appleOnBoard=false;
+        
         switch (direction){
             case "Left":
                 if( handler.getWorld().body.isEmpty()){

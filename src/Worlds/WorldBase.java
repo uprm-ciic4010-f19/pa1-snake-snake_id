@@ -30,7 +30,7 @@ public abstract class WorldBase {
 
 
     public Boolean appleOnBoard;
-    protected Apple apple;
+    private Apple apple;
     public Boolean[][] appleLocation;
 
 
@@ -48,53 +48,24 @@ public abstract class WorldBase {
 
     }
     public void tick(){
-
-
-
+    	
     }
     
-   public void render1(Graphics g) {
-   	Graphics2D score = (Graphics2D) g;
-   	String scoreNumber = Double.toString(player.score);
-   	
-   	for (int i = 0 ; i <= 800; i = i + GridPixelsize) {
-   		
-   		
-    		g.setColor(new Color(128,0,128));
-    		g.drawLine(0, i, handler.getWidth(), i);
-    		g.drawLine(i, 0, i, handler.getHeight());
-    		score.setColor(Color.BLACK);
-    		score.setFont ( new Font ("Chalkboard" , Font.PLAIN, 30));
-    		score.drawString( "Score: " + scoreNumber, 600, 50);
-    		
-    		
-    	}
-    }
-
     public void render(Graphics g){
     	//This sets the background color
-    	Color purple = new Color(224, 191, 238);
+    	Color purple = new Color(150, 53, 139);
     	g.setColor(purple);
     	
     	//This actually fills the background
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
 
-        //rendergrid(g);
     }
+	public Apple getApple() {
+		return apple;
+	}
+	public void setApple(Apple apple) {
+		this.apple = apple;
+	}
     
-    /**
-     * Render the grid, comment me out if you don't need me
-     * @param g
-     */
-    public void rendergrid(Graphics g) {
-    	for (int i = 0; i <= 800; i = i + GridPixelsize) {
-
-            g.setColor(Color.black);
-            g.drawLine(0, i, handler.getWidth() , i);
-            g.drawLine(i,0,i,handler.getHeight());
-
-        }
-
-    }
-
+    
 }

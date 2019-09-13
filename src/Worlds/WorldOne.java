@@ -41,7 +41,7 @@ public class WorldOne extends WorldBase{
                 }
             }while(!goodCoordinates);
 
-            apple = new Apple(handler,appleX,appley);
+            setApple(new Apple(handler,appleX,appley));
             appleLocation[appleX][appley]=true;
 
         }
